@@ -1,0 +1,145 @@
+<svg width="1200" height="300" viewBox="0 0 1200 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="DepRadar banner">
+  <defs>
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="1200" y2="300" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0b1220"/>
+      <stop offset="55%" stop-color="#060a14"/>
+      <stop offset="100%" stop-color="#000000"/>
+    </linearGradient>
+
+    <radialGradient id="sweepGrad" cx="150" cy="150" r="110" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#2dd4bf" stop-opacity="0.55"/>
+      <stop offset="60%" stop-color="#2dd4bf" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#2dd4bf" stop-opacity="0"/>
+    </radialGradient>
+
+    <linearGradient id="titleGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#2dd4bf"/>
+      <stop offset="100%" stop-color="#3b82f6"/>
+    </linearGradient>
+
+    <filter id="glowDot" x="-200%" y="-200%" width="500%" height="500%">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <filter id="glowSweep" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="6"/>
+    </filter>
+
+    <filter id="glowText" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="7" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <filter id="glowSmall" x="-200%" y="-200%" width="500%" height="500%">
+      <feGaussianBlur stdDeviation="2.5" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <rect x="0" y="0" width="1200" height="300" fill="url(#bgGrad)"/>
+
+  <!-- dependency-graph mesh -->
+  <g stroke="#3d4f63" stroke-width="1" opacity="0.35">
+    <line x1="300" y1="150" x2="340" y2="60"/>
+    <line x1="340" y1="60" x2="420" y2="40"/>
+    <line x1="420" y1="40" x2="480" y2="90"/>
+    <line x1="340" y1="60" x2="380" y2="120"/>
+    <line x1="480" y1="90" x2="520" y2="140"/>
+    <line x1="520" y1="140" x2="600" y2="70"/>
+    <line x1="600" y1="70" x2="650" y2="130"/>
+    <line x1="600" y1="70" x2="720" y2="50"/>
+    <line x1="720" y1="50" x2="760" y2="110"/>
+    <line x1="760" y1="110" x2="830" y2="80"/>
+    <line x1="830" y1="80" x2="880" y2="140"/>
+    <line x1="830" y1="80" x2="950" y2="60"/>
+    <line x1="950" y1="60" x2="1000" y2="120"/>
+    <line x1="1000" y1="120" x2="1060" y2="70"/>
+    <line x1="1060" y1="70" x2="1110" y2="130"/>
+    <line x1="380" y1="120" x2="340" y2="200"/>
+    <line x1="300" y1="150" x2="340" y2="200"/>
+    <line x1="340" y1="200" x2="420" y2="230"/>
+    <line x1="420" y1="230" x2="480" y2="190"/>
+    <line x1="480" y1="190" x2="550" y2="250"/>
+    <line x1="550" y1="250" x2="620" y2="210"/>
+    <line x1="620" y1="210" x2="690" y2="260"/>
+    <line x1="690" y1="260" x2="760" y2="220"/>
+    <line x1="760" y1="220" x2="830" y2="270"/>
+    <line x1="830" y1="270" x2="900" y2="230"/>
+    <line x1="900" y1="230" x2="970" y2="260"/>
+    <line x1="970" y1="260" x2="1040" y2="210"/>
+    <line x1="1040" y1="210" x2="1100" y2="250"/>
+    <line x1="880" y1="140" x2="900" y2="230"/>
+    <line x1="1110" y1="130" x2="1150" y2="180"/>
+    <line x1="1060" y1="70" x2="1150" y2="90"/>
+    <line x1="1150" y1="90" x2="1150" y2="180"/>
+    <line x1="1150" y1="180" x2="1100" y2="250"/>
+  </g>
+  <g fill="#4b5b6b" opacity="0.55">
+    <circle cx="300" cy="150" r="3"/>
+    <circle cx="340" cy="60" r="3"/>
+    <circle cx="420" cy="40" r="3"/>
+    <circle cx="480" cy="90" r="3"/>
+    <circle cx="380" cy="120" r="3"/>
+    <circle cx="520" cy="140" r="3"/>
+    <circle cx="600" cy="70" r="3"/>
+    <circle cx="650" cy="130" r="3"/>
+    <circle cx="720" cy="50" r="3"/>
+    <circle cx="830" cy="80" r="3"/>
+    <circle cx="880" cy="140" r="3"/>
+    <circle cx="950" cy="60" r="3"/>
+    <circle cx="1000" cy="120" r="3"/>
+    <circle cx="1060" cy="70" r="3"/>
+    <circle cx="1110" cy="130" r="3"/>
+    <circle cx="340" cy="200" r="3"/>
+    <circle cx="420" cy="230" r="3"/>
+    <circle cx="480" cy="190" r="3"/>
+    <circle cx="550" cy="250" r="3"/>
+    <circle cx="620" cy="210" r="3"/>
+    <circle cx="690" cy="260" r="3"/>
+    <circle cx="760" cy="220" r="3"/>
+    <circle cx="830" cy="270" r="3"/>
+    <circle cx="900" cy="230" r="3"/>
+    <circle cx="970" cy="260" r="3"/>
+    <circle cx="1040" cy="210" r="3"/>
+    <circle cx="1100" cy="250" r="3"/>
+    <circle cx="1150" cy="90" r="3"/>
+    <circle cx="1150" cy="180" r="3"/>
+  </g>
+  <!-- flagged nodes: vulnerabilities detected in the dependency graph -->
+  <g filter="url(#glowSmall)">
+    <circle cx="760" cy="110" r="4.5" fill="#f87171"/>
+    <circle cx="620" cy="210" r="4.5" fill="#fbbf24"/>
+  </g>
+
+  <!-- radar motif -->
+  <g filter="url(#glowSweep)">
+    <path d="M150,150 L187.6,46.6 A110,110 0 0,1 258.3,130.9 Z" fill="url(#sweepGrad)"/>
+  </g>
+  <g fill="none" stroke="#2dd4bf">
+    <circle cx="150" cy="150" r="40" stroke-width="2" opacity="0.55"/>
+    <circle cx="150" cy="150" r="75" stroke-width="1.5" opacity="0.4"/>
+    <circle cx="150" cy="150" r="110" stroke-width="1.5" opacity="0.28"/>
+  </g>
+  <circle cx="150" cy="150" r="6" fill="#2dd4bf" filter="url(#glowDot)"/>
+
+  <!-- title -->
+  <text x="300" y="150" font-family="Arial, Helvetica, sans-serif" font-size="76" font-weight="800" fill="url(#titleGrad)" filter="url(#glowText)">DepRadar</text>
+
+  <!-- tagline -->
+  <text x="302" y="192" font-family="Arial, Helvetica, sans-serif" font-size="21" fill="#94a3b8">Securing the open source supply chain, one bounty at a time</text>
+
+  <!-- status chip -->
+  <rect x="302" y="220" width="272" height="34" rx="17" fill="#0f172a" fill-opacity="0.65" stroke="#2dd4bf" stroke-opacity="0.4"/>
+  <circle cx="322" cy="237" r="5" fill="#22c55e" filter="url(#glowSmall)"/>
+  <text x="338" y="242" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="700" letter-spacing="1.5" fill="#d1fae5">LIVE ON STELLAR TESTNET</text>
+</svg>

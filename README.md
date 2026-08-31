@@ -1,5 +1,7 @@
 # DepRadar
 
+![DepRadar](./assets/banner.svg)
+
 **A decentralized security scanner for open-source dependency graphs — funded bounties, not empty advisories.**
 
 [![CI](https://github.com/ALLEN-AYODEJI/DepRadar/actions/workflows/ci.yml/badge.svg)](https://github.com/ALLEN-AYODEJI/DepRadar/actions/workflows/ci.yml)
