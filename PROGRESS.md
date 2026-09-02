@@ -43,3 +43,23 @@ is closed — see [CONTRIBUTING.md](CONTRIBUTING.md).
 - **By:** ALLEN-AYODEJI
 - **Closes:** N/A (prep for the typosquat scanner module)
 - **Status:** Merged. `cargo test --workspace --locked` passes.
+
+### typosquat scanner — edit-distance primitives
+
+- **What:** Adds `src/typosquat/distance.rs`. `levenshtein_distance(a, b)`
+  computes standard Levenshtein edit distance (insert / delete / substitute,
+  no transposition op) over Unicode scalar values with the two-row DP table,
+  no external crate. `nearest_match(candidate, dataset)` returns the closest
+  name in a reference slice and its distance (earliest entry wins ties;
+  empty slice yields `(String::new(), usize::MAX)`). Wired into
+  `src/typosquat/mod.rs`. Still no scoring/thresholding — callers decide
+  what distance counts as suspicious.
+- **Tests:** identical strings → 0; empty-operand cases; one-character-off
+  typosquats (`expres`/`expresss` vs `express`, a single substitution) → 1;
+  transposition → 2; `nearest_match` against the loaded popular-package
+  dataset resolves deliberately misspelled `expresss` → `express` and
+  `requezts` → `requests`, both at distance 1; exact hit → distance 0;
+  empty-dataset sentinel.
+- **By:** ALLEN-AYODEJI
+- **Closes:** N/A (prep for the typosquat scanner module)
+- **Status:** Merged. `cargo test --workspace --locked` passes.
