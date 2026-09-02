@@ -26,3 +26,20 @@ is closed — see [CONTRIBUTING.md](CONTRIBUTING.md).
     against the live testnet contract using the native XLM Stellar Asset
     Contract as the test token, and confirmed via `get_bounty` / `get_claim`
     reads and on-chain transfer events.
+
+### typosquat scanner — popular-package reference data + loader
+
+- **What:** Groundwork for the typosquat detection scanner. Adds
+  `data/popular-packages/npm-top1000.json` and
+  `data/popular-packages/pypi-top1000.json` — each a JSON array of ~1000
+  widely-used package names for that registry (a hand-curated representative
+  snapshot, not a live-fetched ranking). Introduces the crate's off-chain
+  Rust side: a root `deprader` library crate with
+  `src/typosquat/dataset.rs`, exposing `load_popular_packages()`, which
+  embeds both lists at compile time and returns them as one combined
+  `Vec<String>` (npm first, then PyPI). No scoring logic yet — just the data
+  and the loader. Covered by a unit test asserting the combined list is
+  non-empty and contains known packages (`react`, `requests`).
+- **By:** ALLEN-AYODEJI
+- **Closes:** N/A (prep for the typosquat scanner module)
+- **Status:** Merged. `cargo test --workspace --locked` passes.
