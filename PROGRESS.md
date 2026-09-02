@@ -18,7 +18,7 @@ is closed — see [CONTRIBUTING.md](CONTRIBUTING.md).
   `submit_claim(bounty_id, claimant, proof_ref)` (records a claim, no fund
   movement), and `release(admin, bounty_id)` (admin-gated, one-time payout
   of locked funds to the claimant). Getters: `get_bounty`, `get_claim`.
-- **By:** MamaLove360
+- **By:** ALLEN-AYODEJI
 - **Closes:** N/A (predates the issue tracker)
 - **Status:** Deployed and verified on Stellar testnet.
   - Contract ID: `CBFLUY6NB3JOQDEUOF2JG5TL3UD7GCQ7APUJ6EHNNSUJLUELHSGIG675`

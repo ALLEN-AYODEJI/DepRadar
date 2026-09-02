@@ -24,7 +24,16 @@ flowchart LR
     Scanner -->|finding: create_bounty| Router[Bounty Router<br/>Soroban contract]
     Router -->|release: payout| Drips[Drips]
     Router -.get_bounty / get_claim.-> Dashboard[Dashboard]
+
+    classDef live fill:#134e4a,stroke:#2dd4bf,color:#e6fffa;
+    classDef planned fill:#1e293b,stroke:#475569,color:#94a3b8,stroke-dasharray:4;
+    class Router live;
+    class Crawler,Scanner,Drips,Dashboard planned;
 ```
+
+Only the **Bounty Router** (solid teal) is built and live on Stellar
+testnet today. The crawler, scanner, Drips integration, and dashboard
+(dashed) are planned — see [Status & Roadmap](#status--roadmap).
 
 - **Crawler** walks registries (npm, PyPI, crates.io, and others as modules
   land) for new packages, new versions, and metadata changes.
@@ -47,8 +56,9 @@ on Stellar testnet:
 
 **Contract ID:** [`CBFLUY6NB3JOQDEUOF2JG5TL3UD7GCQ7APUJ6EHNNSUJLUELHSGIG675`](https://stellar.expert/explorer/testnet/contract/CBFLUY6NB3JOQDEUOF2JG5TL3UD7GCQ7APUJ6EHNNSUJLUELHSGIG675)
 
-The contract's flow is deliberately minimal — three calls, each with a
-single, checkable responsibility:
+A one-time `initialize(admin)` call at deploy time sets the admin address
+that `release` is gated on. The bounty lifecycle itself is deliberately
+minimal — three calls, each with a single, checkable responsibility:
 
 1. **`create_bounty(creator, bounty_id, issue_ref, amount, token)`** — locks
    `amount` of `token` from `creator` against a bounty ID, referencing the

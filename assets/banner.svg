@@ -117,13 +117,20 @@
   </g>
   <!-- flagged nodes: vulnerabilities detected in the dependency graph -->
   <g filter="url(#glowSmall)">
-    <circle cx="760" cy="110" r="4.5" fill="#f87171"/>
-    <circle cx="620" cy="210" r="4.5" fill="#fbbf24"/>
+    <circle cx="760" cy="110" r="4.5" fill="#f87171">
+      <animate attributeName="opacity" values="1;0.4;1" dur="1.8s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="620" cy="210" r="4.5" fill="#fbbf24">
+      <animate attributeName="opacity" values="1;0.45;1" dur="2.4s" repeatCount="indefinite"/>
+    </circle>
   </g>
 
   <!-- radar motif -->
   <g filter="url(#glowSweep)">
-    <path d="M150,150 L187.6,46.6 A110,110 0 0,1 258.3,130.9 Z" fill="url(#sweepGrad)"/>
+    <path d="M150,150 L187.6,46.6 A110,110 0 0,1 258.3,130.9 Z" fill="url(#sweepGrad)">
+      <animateTransform attributeName="transform" type="rotate"
+        from="0 150 150" to="360 150 150" dur="5s" repeatCount="indefinite"/>
+    </path>
   </g>
   <g fill="none" stroke="#2dd4bf">
     <circle cx="150" cy="150" r="40" stroke-width="2" opacity="0.55"/>
