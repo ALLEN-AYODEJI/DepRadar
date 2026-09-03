@@ -63,3 +63,31 @@ is closed — see [CONTRIBUTING.md](CONTRIBUTING.md).
 - **By:** ALLEN-AYODEJI
 - **Closes:** N/A (prep for the typosquat scanner module)
 - **Status:** Merged. `cargo test --workspace --locked` passes.
+
+### typosquat scanner — homoglyph (lookalike-character) signal
+
+- **What:** Adds `src/typosquat/homoglyph.rs`, a second detection signal that
+  sits alongside the edit-distance one and shares no code with it.
+  `normalize_homoglyphs(candidate)` rewrites a name by mapping known Unicode
+  lookalike characters back to their Latin equivalents — a hand-picked,
+  deliberately conservative subset of the Unicode `confusables.txt` (UTR #39):
+  Cyrillic, Greek and Armenian letters plus a couple of Latin-extended/IPA
+  forms, and the entire full-width ASCII block (`U+FF01..=U+FF5E`) handled as a
+  contiguous range. `homoglyph_impersonation(candidate, dataset)` returns
+  `Some(name)` only when a substitution actually happened *and* the normalised
+  form exactly matches an entry in `dataset` (in practice the combined list
+  from `load_popular_packages()`); a correctly-spelled popular package
+  normalises to itself and is never flagged. Wired into `src/typosquat/mod.rs`.
+  Still no scoring/thresholding — this is a boolean signal for the
+  (not-yet-written) scanner to weigh.
+- **Tests:** `normalize_homoglyphs` is identity for plain ASCII (incl. a
+  scoped `@angular/core` name and the empty string); Cyrillic `а` (U+0430) and
+  `о` (U+043E) in `react`/`lodash` → Latin; full-width `ｅｘｐｒｅｓｓ` → `express`;
+  Greek omicron (U+03BF) in `commander` → `o`. `homoglyph_impersonation`
+  against the loaded popular-package dataset flags a Cyrillic-`а` `react`
+  (npm), a full-width `requests` (PyPI) and a Greek-omicron `lodash` (npm);
+  returns `None` for a correctly-spelled `react` and for a homoglyph name
+  (`reаctxyzzy`) whose normalised form is not a popular package.
+- **By:** ALLEN-AYODEJI
+- **Closes:** N/A (prep for the typosquat scanner module)
+- **Status:** Merged. `cargo test --workspace --locked` passes.
