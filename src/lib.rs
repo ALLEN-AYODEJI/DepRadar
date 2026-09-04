@@ -4,4 +4,5 @@
 //! on-chain bounty router (`contracts/deprader_router`). Only the pieces that
 //! have landed are wired up here.
 
+pub mod cve;
 pub mod typosquat;
