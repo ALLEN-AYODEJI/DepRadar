@@ -10,6 +10,22 @@ is closed — see [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Entries
 
+### testnet read client — minimal soroban read client
+
+- **What:** Adds a standalone TypeScript/Node.js read client at
+  `clients/read-client/` (with a root runner script at `scripts/read-client.mjs`).
+  Connects to the Stellar testnet RPC (`https://soroban-testnet.stellar.org`)
+  and queries the deployed `deprader_router` contract
+  (`CBFLUY6NB3JOQDEUOF2JG5TL3UD7GCQ7APUJ6EHNNSUJLUELHSGIG675`) via simulation
+  calls `get_bounty(bounty_id)` and `get_claim(bounty_id)`. Decodes on-chain
+  Soroban SCVal data to native typed representations, formats token amounts,
+  handles non-existent/missing records cleanly, and outputs human-readable
+  details. Verified against the deployed testnet contract reading live
+  bounty #1 and claim #1 data.
+- **By:** VincentSai
+- **Closes:** #6
+- **Status:** Verified working against deployed testnet contract.
+
 ### deprader_router contract — create_bounty / submit_claim / release
 
 - **What:** Initial Soroban smart contract at `contracts/deprader_router/`.

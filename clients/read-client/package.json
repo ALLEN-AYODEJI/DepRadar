@@ -1,0 +1,19 @@
+{
+  "name": "depradar-read-client",
+  "version": "0.1.0",
+  "description": "Minimal Soroban testnet read client for DepRadar contract",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "read": "node dist/index.js"
+  },
+  "dependencies": {
+    "@stellar/stellar-sdk": "^13.3.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.0",
+    "typescript": "^5.4.5"
+  }
+}

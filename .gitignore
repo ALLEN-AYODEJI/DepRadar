@@ -4,3 +4,9 @@
 .stellar/
 .soroban/
 **/identity/*.toml
+
+# Node / Client
+node_modules/
+dist/
+package-lock.json
+
