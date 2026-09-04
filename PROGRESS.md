@@ -119,3 +119,33 @@ is closed — see [CONTRIBUTING.md](CONTRIBUTING.md).
 - **Closes:** #6
 - **Status:** Merged. No UI yet, per the issue scope — read-only CLI output
   only.
+
+### CVE matching — OSV API client
+
+- **What:** Adds `src/cve/osv_client.rs`, the first piece of the CVE
+  matching scanner class. `query_osv(package_name, ecosystem, version)`
+  queries the [OSV.dev](https://osv.dev) API (`POST /v1/query`) for a package
+  pinned to an exact version and parses the response into typed structs
+  (`OsvQueryResponse` → `Vec<OsvVulnerability>`, with nested `OsvAffected` /
+  `OsvRange` / `OsvEvent` / `OsvSeverity` / `OsvReference`) mirroring the
+  relevant parts of the [OSV schema](https://ossf.github.io/osv-schema/). The
+  `ecosystem` argument is a typed `Ecosystem` enum (`Npm`, `PyPI`,
+  `CratesIo`) rather than a free string, mapped to the exact ecosystem names
+  OSV expects. No filtering, deduplication, or scoring — an empty `vulns`
+  list just means OSV has no known match for that exact version; turning raw
+  matches into scored findings is later work. Uses `reqwest` (blocking
+  client) for HTTP and `serde`/`serde_json` for (de)serialization — new
+  dependencies for the crate, added to `Cargo.toml`.
+- **Tests:** `query_osv` against the real OSV API for `lodash@4.17.4` (npm),
+  a known-vulnerable pair predating the fix for GHSA-29mw-wpgm-hmr9 /
+  CVE-2020-28500 (ReDoS in `trim`/`toNumber`/`trimEnd`, fixed in 4.17.21) —
+  asserts the response is non-empty and includes that CVE alias. The test
+  skips (rather than fails) if the request itself can't complete, since that
+  reflects the runner's network access rather than a bug in the client. Also
+  a plain unit test that `Ecosystem::as_osv_str()` matches OSV's documented
+  ecosystem names for `npm`/`PyPI`/`crates.io`.
+- **By:** ALLEN-AYODEJI
+- **Closes:** N/A (prep for the CVE matching scanner module)
+- **Status:** Merged. `cargo test --workspace --locked` passes, including a
+  live network call to `api.osv.dev` confirming the known-vulnerable test
+  case.
