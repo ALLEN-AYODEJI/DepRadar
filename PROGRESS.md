@@ -149,3 +149,37 @@ is closed — see [CONTRIBUTING.md](CONTRIBUTING.md).
 - **Status:** Merged. `cargo test --workspace --locked` passes, including a
   live network call to `api.osv.dev` confirming the known-vulnerable test
   case.
+
+### typosquat scanner — combined scoring API + CLI
+
+- **What:** Adds `src/typosquat/scanner.rs`, the single entry point that ties
+  the two independent typosquat signals together:
+  `score_package(name: &str) -> ScanResult` loads
+  [`load_popular_packages()`](src/typosquat/dataset.rs) internally, runs
+  `nearest_match` ([`distance.rs`](src/typosquat/distance.rs)) and
+  `homoglyph_impersonation` ([`homoglyph.rs`](src/typosquat/homoglyph.rs))
+  against it, and returns a `ScanResult` recording which signal(s) fired and
+  why. A `distance_match` only counts when the nearest name is within
+  `DISTANCE_THRESHOLD` (2) edits and isn't an exact match (distance 0 is the
+  real package, not a typosquat); `homoglyph_match` is whatever
+  `homoglyph_impersonation` reports. `ScanResult::is_likely_typosquat()` is
+  true if either fired, and either, both, or neither can fire independently
+  since the two signals still share no logic. `ScanResult` implements
+  `Display` for human-readable output (used by the CLI below). Also adds
+  `src/bin/scan.rs`, a small binary (`cargo run --bin scan -- <package-name>`)
+  that scores its one argument and prints the result — the manual-testing
+  surface the issue asked for. Wired into `src/typosquat/mod.rs`.
+- **Tests:** exact popular-package name (`react`) and a long unrelated
+  string are both unflagged; a pure edit-distance typo (`expresss` →
+  `express`, distance 1) flags only `distance_match`; a full-width `requests`
+  flags only `homoglyph_match` (its raw-codepoint edit distance to any
+  dataset entry is 8, well past the threshold); a Cyrillic-`а` `react`
+  flags *both* (it's simultaneously one substitution away from `react` and a
+  homoglyph impersonation of it) — the concrete case the issue asked for.
+  Two more tests check `Display` output for the both-signals and no-signal
+  cases.
+- **By:** ALLEN-AYODEJI
+- **Closes:** #4
+- **Status:** Pushed on `typosquat-combined-scoring`, pending review/merge.
+  Depended on #2 (dataset/distance) and the homoglyph signal (#7), both
+  already merged.
